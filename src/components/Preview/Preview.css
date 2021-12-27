@@ -1,0 +1,60 @@
+.preview{
+  max-width: 1280px;
+  min-height: 484px;
+  box-sizing: border-box;
+  background: #465DFF;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.preview__container{
+  background-image: url(../../images/main/main_logo.svg);
+  background-color: unset;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 320px 320px;
+}
+
+.preview__title{
+  width: 730px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 50px;
+  line-height: 58px;
+  color: #fff;
+  text-align: center;
+  margin: auto 0;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 1023px) {
+  .preview {
+    min-height: 768px;
+    padding-bottom: 16px;
+  }
+}
+  
+@media screen and (max-width: 767px) {
+  .preview {
+    min-height: 532px;
+    padding-bottom: 38px;
+  }
+  
+  .preview__container {
+    background-size: 248px 248px;
+  }
+  
+  .preview__title {
+    width: 300px;
+    font-size: 31px;
+    line-height: 39px;
+  }
+}
+  
+@media screen and (max-width: 319px) {
+  .preview__title {
+    width: 100%;
+    font-size: 20px;
+  }
+}
