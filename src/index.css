@@ -1,8 +1,7 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url(./vendor/normalize.css);
+
+@import url(./components/App/App.css);
+
+@import url(./components/Header/Header.css);
+@import url(./components/Logo/Logo.css);
+@import url(./components/Navigation/Navigation.css);
