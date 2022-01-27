@@ -1,16 +1,12 @@
-import React from 'react';
-import Navigation from '../Navigation/Navigation';
-import Logo from '../Logo/Logo';
-import MenuButton from '../MenuButton/MenuButton';
+import React from "react";
+import Navigation from "../Navigation/Navigation";
 
-function Header(props) {
-  return (
-    <header className="header">
-      <Logo />
-      {props.loggedIn && (<Navigation />)}
-      {props.loggedIn && (<MenuButton onOpenMenu={props.onOpenMenu} />)}
-    </header>
-  )
+function Header({place}) {
+    return (
+        <header className={`header header_place_${place}`}>
+            <Navigation place={place}/>
+        </header>
+    );
 }
 
 export default Header;

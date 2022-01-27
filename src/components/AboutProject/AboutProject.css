@@ -1,0 +1,145 @@
+.about-project {
+  padding: 110px 70px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.about-project__container {
+  margin: 70px auto 0;
+  max-width: 1140px;
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: max-content;
+}
+
+.about-project__element {
+  padding: 0 20px 0 0;
+  max-width: 500px;
+}
+
+.about-project__element-title {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Serif', sans-serif;
+  font-weight: normal;
+  color: #000;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.about-project__element-text {
+  margin: 26px 0 0;
+  padding: 0;
+  font-family: 'Inter', 'Serif', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.progress-bar {
+  margin: 110px 0 0;
+  width: 100%;
+  max-width: 1210px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.progress-bar__element {
+  margin: 0 auto;
+  padding: 9px 0;
+  background-color: #2be080;
+}
+
+.progress-bar__caption {
+  margin: 0;
+  font-family: 'Inter', 'Serif', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000;
+}
+
+.progress-bar__text {
+  font-family: 'Inter', 'Serif', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #A0A0A0;
+}
+
+.progress-bar-element_color {
+  background-color: #F2F2F2;
+}
+
+.progress-bar__caption_color {
+  color: #000000;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__element-text {
+    margin-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .progress-bar {
+    margin-top: 93px;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .progress-bar {
+    margin: 60px 0 0;
+    grid-template-columns: 2fr 3fr;
+  }
+
+  .about-project__container {
+    margin-top: 60px;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content;
+  }
+
+  .about-project__element {
+    padding: 0;
+  }
+
+  .about-project__element:last-child {
+    margin-top: 56px;
+  }
+
+  .about-project__element-text {
+    margin-top: 16px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .progress-bar__caption {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .progress-bar__text {
+    margin: 10px 0 0;
+    font-size: 11px;
+    line-height: 13px;
+  }
+}
