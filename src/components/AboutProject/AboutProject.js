@@ -34,7 +34,7 @@ function AboutProject() {
           <p className="progress-bar__text">Back-end</p>
         </div>
         <div className="progress-bar__container">
-          <div className="progress-bar__element progress-bar-element_color">
+          <div className="progress-bar__element progress-bar__element_color">
             <p className="progress-bar__caption progress-bar__caption_color">4 недели</p>
           </div>
           <p className="progress-bar__text">Front-end</p>

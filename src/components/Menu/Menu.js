@@ -5,8 +5,8 @@ function MenuButton( {isOpened, onMobileMenuClose, place} ) {
   const handleMobileMenuClose = () => onMobileMenuClose();
 
   return (
-    <div className={`menu__container ${isOpened ? "menu__container_opened" : ""}`}>
-      <div className={`menu ${isOpened ? "menu_opened" : ""}`}>
+    <div className={`menu ${isOpened ? "menu_opened" : ""}`}>
+      <div className={`menu__container ${isOpened ? "menu__container_opened" : ""}`}>
         <button className="menu__close-button" onClick={handleMobileMenuClose}/>
         <nav className="menu__navigation">
           <ul className="menu__list">

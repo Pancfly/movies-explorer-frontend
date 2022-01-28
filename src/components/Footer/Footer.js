@@ -13,7 +13,7 @@ function Footer() {
         <h2 className="footer__title">
           Учебный проект Яндекс.Практикум х BeatFilm.
         </h2>
-        <div className="info__container">
+        <div className="footer__info-container">
           <p className="footer__copyright">&copy; 2022</p>
           <ul className="footer__nav-bar">
             <li className="footer__nav-item">

@@ -54,7 +54,7 @@
   line-height: 18px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 540px) {
   .filter-checkbox__label {
     font-size: 13px;
   }

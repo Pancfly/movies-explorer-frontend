@@ -35,7 +35,7 @@ function Navigation({ place }) {
       <Link to="/profile"
         className={`navigation__profile-edit navigation__profile-edit_place_header ${place === "landing"
         ? "navigation__profile-edit_hidden"
-        : ""} navigation__profile_edit_place_header`}>
+        : ""}`}>
         <span className="navigation__profile-text">Аккаунт</span>
         <div className="navigation__profile-icon-wrapper">
           <div className="navigation__profile-icon"/>

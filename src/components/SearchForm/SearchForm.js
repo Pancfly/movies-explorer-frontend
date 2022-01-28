@@ -44,7 +44,6 @@ function SearchForm({ onSubmit }) {
       </div>
     </div>
   );
-
 }
 
 export default SearchForm;

@@ -19,6 +19,7 @@
 
 .about-me__container_direction_column {
   flex-direction: column;
+  padding: 0;
 }
 
 .about-me__title {
@@ -124,7 +125,11 @@
 @media screen and (max-width: 600px) {
   .about-me__container {
     flex-direction: column-reverse;
-    align-items: center;
+  }
+
+  .about-me__container_direction_column {
+    flex-direction: column;
+    padding: 0;
   }
 
   .about-me__photo {
