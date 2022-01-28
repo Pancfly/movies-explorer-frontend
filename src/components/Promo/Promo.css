@@ -29,7 +29,6 @@
   position: absolute;
   top: calc(50% - 160px);
   right: calc(50% - 160px);
-  opacity: 0.2;
 }
 
 @media screen and (max-width: 1023px) {
