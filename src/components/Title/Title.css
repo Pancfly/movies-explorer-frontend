@@ -1,0 +1,19 @@
+.title {
+  margin: 0;
+  width: 100%;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 27px;
+  color: #000000;
+  letter-spacing: -0.04em;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #000000;
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    padding-bottom: 28px;
+  }
+}
