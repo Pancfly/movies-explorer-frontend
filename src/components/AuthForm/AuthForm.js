@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/authform/logo.svg";
 
-function AuthForm({ children, title, buttonText, text, linkText, linkPath, onSubmit, loginPage }) {
+function AuthForm({ children, title, buttonText, text, linkText, linkPath, onSubmit, isFormValid, isPreloaderShowing, loginPage }) {
   return (
     <div className="auth-form">
       <Link to="/" className="auth-form__logo-link">
@@ -14,11 +14,11 @@ function AuthForm({ children, title, buttonText, text, linkText, linkPath, onSub
           {children}
         </div>
         <div className="auth-form__wrapper">
-          <button className={`auth-form__button ${loginPage ? "auth-form__button_login" : ""}`} type="submit">
+          <button className={`auth-form__button ${loginPage ? "auth-form__button_login" : ""} ${!isFormValid && "auth-form__button_disabled"}`} type="submit" disabled={!isFormValid && !isPreloaderShowing}>
             {buttonText}
           </button>
           <p className="auth-form__text">
-            {`${text} `}
+            {text}
             <Link className="auth-form__link" to={linkPath}>
               {linkText}
             </Link>

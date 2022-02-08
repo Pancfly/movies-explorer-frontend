@@ -96,6 +96,14 @@
   margin-top: 179px;
 }
 
+.auth-form__button_disabled {
+  background-color: #9c929286
+}
+
+.auth-form__button_disabled:hover {
+  opacity: 1;
+}
+
 .auth-form__text {
   font-family: 'Inter', 'Serif', sans-serif;
   font-size: 14px;

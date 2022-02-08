@@ -4,7 +4,7 @@ import Logo from "../Logo/Logo";
 import Menu from "../Menu/Menu";
 
 
-function Navigation({ place }) {
+function Navigation({ place, isLogedIn }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const handleMobileMenuOpen = () => setIsMobileMenuOpen(true);
   const onMobileMenuClose = () => setIsMobileMenuOpen(false);
@@ -12,7 +12,7 @@ function Navigation({ place }) {
   return (
     <nav className="navigation">
       <Logo />
-      <ul className={`navigation__films ${place === "landing" ? "navigation__films_hidden" : ""}`}>
+      <ul className={`navigation__films ${!isLogedIn ? "navigation__films_hidden" : ""}`}>
         <li className="navigation__films-element">
           <Link to="/movies" className={`navigation__link ${place === "movies" ? "navigation__link_active" : ""}`}>
             Фильмы
@@ -24,7 +24,7 @@ function Navigation({ place }) {
           </Link>
         </li>
       </ul>
-      <div className={`navigation__login ${place !== "landing" ? "navigation__login_hidden" : ""}`}>
+      <div className={`navigation__login ${isLogedIn ? "navigation__login_hidden" : ""}`}>
         <Link to="/signup" className="navigation__login-element">
           Регистрация
         </Link>
@@ -33,7 +33,7 @@ function Navigation({ place }) {
         </Link>
       </div>
       <Link to="/profile"
-        className={`navigation__profile-edit navigation__profile-edit_place_header ${place === "landing"
+        className={`navigation__profile-edit navigation__profile-edit_place_header ${!isLogedIn
         ? "navigation__profile-edit_hidden"
         : ""}`}>
         <span className="navigation__profile-text">Аккаунт</span>
@@ -41,7 +41,7 @@ function Navigation({ place }) {
           <div className="navigation__profile-icon"/>
         </div>
       </Link>
-      <button className={`navigation__burger-button ${isMobileMenuOpen || place === "landing"
+      <button className={`navigation__burger-button ${isMobileMenuOpen || !isLogedIn
         ? "navigation__burger-button_hidden"
         : ""}`} type="button" onClick={handleMobileMenuOpen}>
       </button>

@@ -47,6 +47,27 @@
   outline: none;
 }
 
+.profile__span-input-error {
+  font-family: 'Inter', 'Serif', sans-serif;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #ee3465;
+}
+
+.profile__seccess-message {
+  margin: 0 0 20px;
+  font-family: 'Inter', 'Serif', sans-serif;
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+  color: #465dff;
+  visibility: hidden;
+}
+
+.profile__seccess-message_visible {
+  visibility: visible;
+}
+
 .profile__button {
   border: none;
   padding: 0;

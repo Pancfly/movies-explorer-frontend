@@ -1,154 +1,79 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
-import MovieCardImage from "../../images/movies/cardimage.svg";
 
-function Movies() {
+function Movies({ isMoviesShort, setIsMoviesShort,filterShortMovies, handleSearchByQuery, downloadedMovies,
+  savedMovies, checkIsMovieSaved, handleSaveMovie, handleDeleteMovie, handleMarkedMovie, isPreloaderShowing, setIsPreloaderShowing }) {
   let location = useLocation();
-  const [isLoadingData, setIsLoadingData] = React.useState(true);
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [isFirstRequest, setIsFirstRequest] = React.useState(true);
+  const [findedMovies, setFindedMovies] = React.useState([]);
 
-  const movies_card_list_data = [
-    {
-      id: 1,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: true,
-    },
-    {
-      id: 2,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: false,
-    },
-    {
-      id: 3,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: true,
-    },
-    {
-      id: 4,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: false,
-    },
-    {
-      id: 5,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: false,
-    },
-    {
-      id: 6,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: false,
-    },
-    {
-      id: 7,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: true,
-    },
-    {
-      id: 8,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: true,
-    },
-    {
-      id: 9,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: true,
-    },
-    {
-      id: 10,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: true,
-    },
-    {
-      id: 11,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: true,
-    },
-    {
-      id: 12,
-      title: "33 слова о дизайне",
-      subtitle: "1ч 47м",
-      imageAlt: "кадр из фильма",
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: true,
-    },
-  ];
+  const handleMoviesSearch = useCallback(() => {
+    if (searchQuery.length > 0) {
+        setFindedMovies(handleSearchByQuery(downloadedMovies, searchQuery));
+        setIsFirstRequest(false);
+        localStorage.setItem("lastQuery", searchQuery);
+    }
 
-  React.useEffect(() => {
-    const loadingDataTimeout = setTimeout(() => {
-      setIsLoadingData(false);
-    }, 1500);
+    setTimeout(() => setIsPreloaderShowing(false), 1000);
+  }, [downloadedMovies, handleSearchByQuery, searchQuery, setIsPreloaderShowing]);
 
-    return () => {
-      clearTimeout(loadingDataTimeout);
-    };
-  }, [])
+  useEffect(() => {
+    handleMoviesSearch();
+  }, [handleMoviesSearch]);
 
-  const handleSubmit = (data) => {
-    console.log(data);
-  }
+  const getLastCheckboxStatus = useCallback(() => {
+    const lastCheckboxStatus = localStorage.getItem("isShortStatus");
+    if (lastCheckboxStatus && lastCheckboxStatus === "true") {
+      return true;
+    } else {
+      return false;
+    }
+  }, []);
+
+  const showMoviesFromLastSearch = useCallback(() => {
+    const lastQuery = localStorage.getItem("lastQuery");
+    if (lastQuery && isFirstRequest) {
+      const longMovies = handleSearchByQuery(downloadedMovies, lastQuery);
+      const shortMovies = filterShortMovies(longMovies);
+      if (getLastCheckboxStatus()) {
+        setFindedMovies(shortMovies);
+        setIsMoviesShort(true);
+      } else {
+        setFindedMovies(longMovies);
+        setIsMoviesShort(false);
+      }
+    }
+  }, [downloadedMovies, filterShortMovies, getLastCheckboxStatus, handleSearchByQuery, isFirstRequest, setIsMoviesShort]);
+
+  useEffect(() => {
+    showMoviesFromLastSearch();
+  }, [showMoviesFromLastSearch]);
 
   return (
     <main>
-      <SearchForm onSubmit={handleSubmit}/>
-      {isLoadingData ? (
-        <Preloader />
-      ) : (
-        <>
-          <MoviesCardList
-            data={movies_card_list_data}
-            locationPathname={location.pathname}
-          />
-          <ShowMoreButton onClick={() => console.log("Показать еще")}/>
-        </>
-      )}
+      <SearchForm
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        isMoviesShort={isMoviesShort}
+        setIsMoviesShort={setIsMoviesShort}
+        setIsPreloaderShowing={setIsPreloaderShowing}
+      />
+      <MoviesCardList
+        isMoviesShort={isMoviesShort}
+        filterShortMovies={filterShortMovies}
+        findedMovies={findedMovies}
+        savedMovies={savedMovies}
+        checkIsMovieSaved={checkIsMovieSaved}
+        handleSaveMovie={handleSaveMovie}
+        handleDeleteMovie={handleDeleteMovie}
+        handleMarkedMovie={handleMarkedMovie}
+        isPreloaderShowing={isPreloaderShowing}
+        setIsPreloaderShowing={setIsPreloaderShowing}
+        locationPathname={location.pathname}
+      />
     </main>
   )
 }
