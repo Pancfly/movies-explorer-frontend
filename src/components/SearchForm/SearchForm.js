@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import useFormValidator from "../../hooks/formValidation"
+import useFormValidator from "../../hooks/formValidation";
 
 function SearchForm({ setSearchQuery, isMoviesShort, setIsMoviesShort, setIsPreloaderShowing }) {
   const lastQuery = localStorage.getItem("lastQuery");

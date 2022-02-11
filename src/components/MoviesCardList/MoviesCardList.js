@@ -1,23 +1,29 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
+import { DESKTOP_WIDTH, MOBILE_WIDTH, AMOUNT_CARDS_FOR_DESKTOP, SHOWMORE_WIDTH,
+  AMOUNT_CARDS_FOR_PAD, AMOUNT_CARDS_FOR_MOBILE, AMOUNT_CARDS_FOR_DESKTOP_SHOWMORE,
+  AMOUNT_CARDS_FOR_MOBILE_SHOWMORE, HERE_WILL_BE_YOUR_SAVED_MOVIES, HERE_WILL_BE_YOUR_MOVIES,
+  SHORT_MOVIES_NOT_FOUND, NO_MOVIES_WITH_LAST_QUERY } from "../../utils/constants"
 
 function MoviesCardList({ locationPathname, searchQuery, isMoviesShort, filterShortMovies, findedMovies,
   savedMovies, handleSaveMovie, handleDeleteMovie, checkIsMovieSaved, handleMarkedMovie, isPreloaderShowing,
   setIsPreloaderShowing }) {
+
+  const location = useLocation();
   const [numberOfCardsToShow, setNumberOfCardsToShow] = useState(0);
   const [renderMovies, setRenderMovies] = useState([]);
   const [moviesErrorMessage, setMoviesErrorMessage] = useState("");
 
   const numberOfInitialCards = () => {
-    if (window.innerWidth >= 1024) {
-      setNumberOfCardsToShow(12);
-    } else if (window.innerWidth >= 768) {
-      setNumberOfCardsToShow(8);
+    if (window.innerWidth >= DESKTOP_WIDTH) {
+      setNumberOfCardsToShow(AMOUNT_CARDS_FOR_DESKTOP);
+    } else if (window.innerWidth >= MOBILE_WIDTH) {
+      setNumberOfCardsToShow(AMOUNT_CARDS_FOR_PAD);
     } else {
-      setNumberOfCardsToShow(5);
+      setNumberOfCardsToShow(AMOUNT_CARDS_FOR_MOBILE);
     }
   };
 
@@ -40,28 +46,36 @@ function MoviesCardList({ locationPathname, searchQuery, isMoviesShort, filterSh
     setTypeOfMovies();
   }, [setTypeOfMovies]);
 
- function handleClickMore() {
-    if (window.innerWidth >= 1050) {
-      setNumberOfCardsToShow(numberOfCardsToShow + 3);
+  function handleClickMore() {
+    if (window.innerWidth >= SHOWMORE_WIDTH) {
+      setNumberOfCardsToShow(numberOfCardsToShow + AMOUNT_CARDS_FOR_DESKTOP_SHOWMORE);
+      if(numberOfCardsToShow > renderMovies.length) {
+        let nonExistentCards = numberOfCardsToShow - renderMovies.length;
+        setNumberOfCardsToShow(numberOfCardsToShow - nonExistentCards);
+      }
     } else {
-      setNumberOfCardsToShow(numberOfCardsToShow + 2);
+      setNumberOfCardsToShow(numberOfCardsToShow + AMOUNT_CARDS_FOR_MOBILE_SHOWMORE);
+      if(numberOfCardsToShow > renderMovies.length) {
+        let nonExistentCards = numberOfCardsToShow - renderMovies.length;
+        setNumberOfCardsToShow(numberOfCardsToShow - nonExistentCards);
+      }
     }
- }
+  }
 
   useEffect(() => {
     const lastQuery = localStorage.getItem("lastQuery");
-    if (locationPathname === "/saved-movies" && renderMovies.length === 0) {
-        setMoviesErrorMessage("Здесь появятся ваши сохраненные фильмы.");
+    if (location.pathname === "/saved-movies" && renderMovies.length === 0) {
+        setMoviesErrorMessage(HERE_WILL_BE_YOUR_SAVED_MOVIES);
     } else if (!lastQuery && renderMovies.length === 0) {
-        setMoviesErrorMessage("Здесь появятся ваши фильмы.");
+        setMoviesErrorMessage(HERE_WILL_BE_YOUR_MOVIES);
     } else if (lastQuery && isMoviesShort && renderMovies.length === 0) {
-        setMoviesErrorMessage("Короткометражных фильмов по запросу не найдено.");
+        setMoviesErrorMessage(SHORT_MOVIES_NOT_FOUND);
     } else if (lastQuery && renderMovies.length === 0) {
-        setMoviesErrorMessage("По последнему запросу ничего не найдено.");
+        setMoviesErrorMessage(NO_MOVIES_WITH_LAST_QUERY);
     } else {
         setMoviesErrorMessage(" ");
     }
-  }, [isMoviesShort, locationPathname, moviesErrorMessage, renderMovies.length, searchQuery, setMoviesErrorMessage]);
+  }, [isMoviesShort, location.pathname, moviesErrorMessage, renderMovies.length, searchQuery, setMoviesErrorMessage]);
 
   return (
     <Switch>

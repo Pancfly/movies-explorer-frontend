@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch, useHistory, useLocation } from "react-router-dom";
-import { existFooterForPage, serverImageUrl } from "../../utils/constants";
+import { EXIST_FOOTER_FOR_PAGE, SERVER_IMAGE_URL, SHORT_DURATION, YOU_SUCCESS_REGISTER,
+  NEW_CURRENTUSER_DATA_SUCCESS } from "../../utils/constants";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
@@ -39,7 +40,7 @@ function App() {
       .then(() => {
         setIsResponseSuccessful(true);
         setIsInfoTooltipOpen(true);
-        setInfoTooltipMessage("Вы успешно зарегистрировались!");
+        setInfoTooltipMessage(YOU_SUCCESS_REGISTER);
         handleLogin({ email, password });
       })
       .catch((err) => {
@@ -74,13 +75,10 @@ function App() {
       .then(() => {
         setIsLogedIn(false);
           history.push("/");
-          localStorage.removeItem("localMovies");
-          localStorage.removeItem("lastQuery");
-          localStorage.removeItem("isShortStatus");
+          localStorage.clear();
         })
       .catch((err) => {
         console.log(err);
-        handleError(err);
       })
       .finally(() => {
         setIsPreloaderShowing(false);
@@ -94,14 +92,13 @@ function App() {
       .then(() => {
         setCurrentUser({ name, email });
         setIsInfoTooltipOpen(true);
-        setInfoTooltipMessage("Новые данные профиля сохранены");
+        setInfoTooltipMessage(NEW_CURRENTUSER_DATA_SUCCESS);
         setIsResponseSuccessful(true);
       })
       .catch((err) => {
         setIsInfoTooltipOpen(true);
         setIsResponseSuccessful(false);
         console.log(err);
-        handleError(err);
       })
       .finally(() => {
         setIsSuccessMessageShowing(true);
@@ -119,15 +116,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        handleError(err);
       })
-  }
-
-  function handleError(err) {
-    if (err.status === 401) {
-      setIsLogedIn(false);
-      localStorage.clear();
-    }
   }
 
   const isMoviesDownloaded = useCallback(() => {
@@ -149,9 +138,9 @@ function App() {
             duration : movie.duration,
             year : movie.year,
             description : movie.description,
-            image: serverImageUrl + movie.image.url,
+            image: SERVER_IMAGE_URL + movie.image.url,
             trailer: movie.trailerLink,
-            thumbnail: serverImageUrl + movie.image.formats.thumbnail.url,
+            thumbnail: SERVER_IMAGE_URL + movie.image.formats.thumbnail.url,
             movieId: movie.id,
             nameRU : movie.nameRU,
             nameEN : movie.nameEN,
@@ -181,7 +170,7 @@ function App() {
 
   function filterShortMovies(movies) {
     return movies.filter((movie) => {
-      return movie.duration <= 40;
+      return movie.duration <= SHORT_DURATION;
     });
   }
 
@@ -193,7 +182,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        handleError(err);
       })
       .finally(() => {
         setIsPreloaderShowing(false);
@@ -208,7 +196,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        handleError(err);
       })
   }
 
@@ -221,7 +208,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        handleError(err);
       })
   }
 
@@ -328,7 +314,7 @@ function App() {
             <NotFound />
           </Route>
         </Switch>
-        {useRouteMatch(existFooterForPage) ? null : (
+        {useRouteMatch(EXIST_FOOTER_FOR_PAGE) ? null : (
           <Footer />
         )}
         <InfoTooltip

@@ -87,6 +87,14 @@
   opacity: 0.7;
 }
 
+.profile__button_disabled {
+  color: #979494;
+}
+
+.profile__button_disabled:hover {
+  opacity: 1;
+}
+
 .profile__button_exit {
   margin: 0 auto;
   color: #ee3465;

@@ -97,11 +97,12 @@
 }
 
 .auth-form__button_disabled {
-  background-color: #9c929286
+  background-color: #9c929286;
 }
 
 .auth-form__button_disabled:hover {
   opacity: 1;
+  cursor: not-allowed;
 }
 
 .auth-form__text {

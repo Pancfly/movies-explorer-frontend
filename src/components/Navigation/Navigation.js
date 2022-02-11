@@ -14,14 +14,14 @@ function Navigation({ place, isLogedIn }) {
       <Logo />
       <ul className={`navigation__films ${!isLogedIn ? "navigation__films_hidden" : ""}`}>
         <li className="navigation__films-element">
-          <Link to="/movies" className={`navigation__link ${place === "movies" ? "navigation__link_active" : ""}`}>
+          <a href="/movies" className={`navigation__link ${place === "movies" ? "navigation__link_active" : ""}`}>
             Фильмы
-          </Link>
+          </a>
         </li>
         <li className="navigation__films-element">
-          <Link to="/saved-movies" className={`navigation__link ${place === "saved-movies" ? "navigation__link_active" : ""}`}>
+          <a href="/saved-movies" className={`navigation__link ${place === "saved-movies" ? "navigation__link_active" : ""}`}>
             Сохранённые фильмы
-          </Link>
+          </a>
         </li>
       </ul>
       <div className={`navigation__login ${isLogedIn ? "navigation__login_hidden" : ""}`}>

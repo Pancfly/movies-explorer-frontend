@@ -16,14 +16,14 @@ function MenuButton({ isOpened, onMobileMenuClose, place }) {
               </Link>
             </li>
             <li className="menu__list-element">
-              <Link className={`menu__link ${place === "movies" ? "menu__link_active" : ""}`} to="/movies" onClick={handleMobileMenuClose}>
+              <a className={`menu__link ${place === "movies" ? "menu__link_active" : ""}`} href="/movies" onClick={handleMobileMenuClose}>
                 Фильмы
-              </Link>
+              </a>
             </li>
             <li className="menu__list-element">
-              <Link className={`menu__link ${place === "saved-movies" ? "menu__link_active" : ""}`} to="/saved-movies" onClick={handleMobileMenuClose}>
+              <a className={`menu__link ${place === "saved-movies" ? "menu__link_active" : ""}`} href="/saved-movies" onClick={handleMobileMenuClose}>
                 Сохранённые фильмы
-              </Link>
+              </a>
             </li>
           </ul>
           <Link className="navigation__profile-edit navigation__profile-edit_place_menu" to="/profile" onClick={handleMobileMenuClose}>

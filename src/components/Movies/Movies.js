@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-function Movies({ isMoviesShort, setIsMoviesShort,filterShortMovies, handleSearchByQuery, downloadedMovies,
+function Movies({ isMoviesShort, setIsMoviesShort, filterShortMovies, handleSearchByQuery, downloadedMovies,
   savedMovies, checkIsMovieSaved, handleSaveMovie, handleDeleteMovie, handleMarkedMovie, isPreloaderShowing, setIsPreloaderShowing }) {
   let location = useLocation();
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -17,7 +17,7 @@ function Movies({ isMoviesShort, setIsMoviesShort,filterShortMovies, handleSearc
         localStorage.setItem("lastQuery", searchQuery);
     }
 
-    setTimeout(() => setIsPreloaderShowing(false), 1000);
+    setTimeout(() => setIsPreloaderShowing(false), 1500);
   }, [downloadedMovies, handleSearchByQuery, searchQuery, setIsPreloaderShowing]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function Movies({ isMoviesShort, setIsMoviesShort,filterShortMovies, handleSearc
 
   const getLastCheckboxStatus = useCallback(() => {
     const lastCheckboxStatus = localStorage.getItem("isShortStatus");
-    if (lastCheckboxStatus && lastCheckboxStatus === "true") {
+    if (lastCheckboxStatus === "true") {
       return true;
     } else {
       return false;
