@@ -72,6 +72,10 @@
   border-radius: 48px;
 }
 
+.search-form__button_disabled {
+  background-color: #e98d71;
+}
+
 .search-form__checkbox-wrapper {
   padding: 0;
   margin: 0;

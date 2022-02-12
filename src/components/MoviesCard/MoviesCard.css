@@ -1,15 +1,16 @@
 .movies-card {
   max-width: 364px;
+  width: 100%;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
 }
-  
+
 .movies-card__container {
   box-sizing: border-box;
   padding: 14px;
   display: flex;
   justify-content: space-between;
 }
-  
+
 .movies-card__title {
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 500;
@@ -21,7 +22,7 @@
   margin: 0 auto 9px auto;
   text-align: left;
 }
-  
+
 .movies-card__subtitle {
   font-family: 'Inter', Arial, sans-serif;
   font-weight: normal;
@@ -33,7 +34,7 @@
   margin: 0 auto;
   text-align: left;
 }
-  
+
 .movies-card__favorite-button {
   width: 30px;
   height: 30px;
@@ -46,18 +47,18 @@
   align-items: center;
   cursor: pointer;
 }
-  
+
 .movies-card__image {
   width: 100%;
   object-fit: cover;
 }
-  
+
 @media screen and (max-width: 1023px) {
   .movies-card {
     max-width: 339px;
   }
 }
-  
+
 @media screen and (max-width: 767px) {
   .movies-card {
     max-width: 300px;

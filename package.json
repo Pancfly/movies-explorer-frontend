@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "npm run build && scp -r ./build/* pancfly@51.250.15.65:/home/pancfly/frontend"
+    "deploy": "npm run build && scp -r ./build/* pancfly@51.250.13.147:/home/pancfly/frontend"
   },
   "eslintConfig": {
     "extends": [

@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 
 import { ReactComponent as AddFavoritesButtonIcon } from "../../images/favoritebutton/add.svg";
 import { ReactComponent as AddFavoritesButtonIconMarked } from "../../images/favoritebutton/marked.svg";
